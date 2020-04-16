@@ -1,4 +1,3 @@
-
 def knapsack(A, k):
     A.sort(key=lambda a: a[0] / a[1], reverse=True)
 
@@ -16,4 +15,6 @@ def knapsack(A, k):
 
     return profit
 
-print( knapsack( [ (1,1), (10,2), (6,3) ], 3 ) )
+
+if __name__ == '__main__':
+    print(knapsack([(1, 1), (10, 2), (6, 3)], 3))
