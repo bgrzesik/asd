@@ -1,5 +1,5 @@
 from math import log2, floor
-
+import operator
 
 def _parent(i):
     # 1 -> 0
@@ -47,8 +47,12 @@ def _identity(val):
 
 class Heap(object):
 
-    def __init__(self, key=None):
+    def __init__(self, key=None, gt=None, lt=None):
         self.key = key if key is not None else _identity
+
+        self.gt = gt if gt is not None else operator.gt
+        self.lt = lt if lt is not None else operator.lt
+
         self.arr = []
 
     @staticmethod
@@ -178,11 +182,13 @@ class Heap(object):
     def _getkey(self, a):
         return self.key(self.arr[a])
 
-    def _greater_then(self, a, b):
-        return self._getkey(a) > self._getkey(b)
-
     def _lesser_then(self, a, b):
-        return self._getkey(a) < self._getkey(b)
+        # a < b
+        return self.lt(self._getkey(a), self._getkey(b))
+
+    def _greater_then(self, a, b):
+        # a > b
+        return self.gt(self._getkey(a), self._getkey(b))
 
 
 if __name__ == '__main__':
