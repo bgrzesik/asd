@@ -1,5 +1,5 @@
 from math import log2, floor
-# from operator import gt, lt
+
 
 def _parent(i):
     # 1 -> 0
@@ -28,6 +28,7 @@ def _has_grandparent(i):
     # 3
     return i >= 3
 
+
 def _level(i):
     return floor(log2(i + 1))
 
@@ -40,15 +41,20 @@ def _is_grandchild(grandparent, grandchild):
     return _parent(_parent(grandchild)) == grandparent
 
 
+def _identity(val):
+    return val
+
+
 class Heap(object):
 
-    def __init__(self):
+    def __init__(self, key=None):
+        self.key = key if key is not None else _identity
         self.arr = []
 
     @staticmethod
-    def from_array(array):
-        heap = Heap()
-        heap.arr = array
+    def from_array(array, key=None):
+        heap = Heap(key=key)
+        heap.arr = list(array)
 
         for i in range(_parent(len(array)), -1, -1):
             heap.push_down(i)
@@ -68,16 +74,16 @@ class Heap(object):
         m = self._smallest_child_grandchild(i)
 
         if _is_grandchild(i, m):
-            if self.arr[m] < self.arr[i]:
-                self.arr[m], self.arr[i] = self.arr[i], self.arr[m]
+            if self._lesser_then(m, i):
+                self._swap(m, i)
 
-                if self.arr[m] > self.arr[_parent(m)]:
-                    self.arr[m], self.arr[_parent(m)] = self.arr[_parent(m)], self.arr[m]
+                if self._greater_then(m, _parent(m)):
+                    self._swap(m, _parent(m))
 
                 self._push_down_min(m)
 
-        elif self.arr[m] < self.arr[i]:
-            self.arr[m], self.arr[i] = self.arr[i], self.arr[m]
+        elif self._lesser_then(m, i):
+            self._swap(m, i)
 
     def _push_down_max(self, i):
         if not self._has_children(i):
@@ -86,35 +92,35 @@ class Heap(object):
         m = self._largest_child_grandchild(i)
 
         if _is_grandchild(i, m):
-            if self.arr[m] > self.arr[i]:
-                self.arr[m], self.arr[i] = self.arr[i], self.arr[m]
+            if self._greater_then(m, i):
+                self._swap(m, i)
 
-                if self.arr[m] < self.arr[_parent(m)]:
-                    self.arr[m], self.arr[_parent(m)] = self.arr[_parent(m)], self.arr[m]
+                if self._lesser_then(m, _parent(m)):
+                    self._swap(m, _parent(m))
 
                 self._push_down_min(m)
 
-        elif self.arr[m] > self.arr[i]:
-            self.arr[m], self.arr[i] = self.arr[i], self.arr[m]
+        elif self._greater_then(m, i):
+            self._swap(m, i)
 
     def _has_children(self, i):
         return _left(i) < len(self.arr)
 
     def _smallest_child_grandchild(self, i):
-        return min(self._child_grandchild(i), key=lambda e: self.arr[e])
+        return min(self._child_grandchild(i), key=self._getkey)
 
     def _largest_child_grandchild(self, i):
-        return max(self._child_grandchild(i), key=lambda e: self.arr[e])
+        return max(self._child_grandchild(i), key=self._getkey)
 
     def _child_grandchild(self, i):
-        arr = [
+        idx = [
             _left(i), _left(_left(i)), _right(_left(i)),
             _right(i), _left(_right(i)), _right(_right(i)),
         ]
-        return filter(lambda e: 0 < e < len(self.arr), arr)
+        return filter(lambda e: 0 < e < len(self.arr), idx)
 
     def extract_min(self):
-        self.arr[0], self.arr[-1] = self.arr[-1], self.arr[0]
+        self._swap(0, -1)
 
         minimum = self.arr.pop()
         self.push_down(0)
@@ -126,10 +132,10 @@ class Heap(object):
             return self.arr.pop()
 
         i = 1
-        if len(self.arr) >= 3 and self.arr[1] < self.arr[2]:
+        if len(self.arr) >= 3 and self._lesser_then(1, 2):
             i = 2
 
-        self.arr[i], self.arr[-1] = self.arr[-1], self.arr[i]
+        self._swap(i, -1)
         maximum = self.arr.pop()
         self.push_down(i)
 
@@ -144,27 +150,40 @@ class Heap(object):
             return
 
         if _is_min_level(i):
-            if self.arr[i] > self.arr[_parent(i)]:
-                self.arr[i], self.arr[_parent(i)] = self.arr[_parent(i)], self.arr[i]
+            if self._greater_then(i, _parent(i)):
+                self._swap(i, _parent(i))
                 self._push_up_max(_parent(i))
             else:
                 self._push_up_min(i)
         else:
-            if self.arr[i] < self.arr[_parent(i)]:
-                self.arr[i], self.arr[_parent(i)] = self.arr[_parent(i)], self.arr[i]
+            if self._lesser_then(i, _parent(i)):
+                self._swap(i, _parent(i))
                 self._push_up_min(_parent(i))
             else:
                 self._push_up_max(i)
 
     def _push_up_min(self, i):
-        while _has_grandparent(i) and self.arr[i] < self.arr[_grandparent(i)]:
-            self.arr[i], self.arr[_grandparent(i)] = self.arr[_grandparent(i)], self.arr[i]
+        while _has_grandparent(i) and self._lesser_then(i, _grandparent(i)):
+            self._swap(i, _grandparent(i))
             i = _grandparent(i)
 
     def _push_up_max(self, i):
-        while _has_grandparent(i) and self.arr[i] > self.arr[_grandparent(i)]:
-            self.arr[i], self.arr[_grandparent(i)] = self.arr[_grandparent(i)], self.arr[i]
+        while _has_grandparent(i) and self._greater_then(i, _grandparent(i)):
+            self._swap(i, _grandparent(i))
             i = _grandparent(i)
+
+    def _swap(self, a, b):
+        self.arr[a], self.arr[b] = self.arr[b], self.arr[a]
+
+    def _getkey(self, a):
+        return self.key(self.arr[a])
+
+    def _greater_then(self, a, b):
+        return self._getkey(a) > self._getkey(b)
+
+    def _lesser_then(self, a, b):
+        return self._getkey(a) < self._getkey(b)
+
 
 if __name__ == '__main__':
     assert _is_min_level(0)
@@ -196,3 +215,17 @@ if __name__ == '__main__':
     assert heap.extract_max() == 4
 
     assert heap.extract_min() == 3
+
+    class Box(object):
+
+        def __init__(self, val):
+            self.val = val
+
+        def getval(self):
+            return self.val
+
+    arr = [Box(0), Box(1), Box(2), Box(3), Box(4), Box(5)]
+    heap = Heap.from_array(arr, key=Box.getval)
+    heap.insert(Box(9))
+    assert heap.extract_max().getval() == 9
+
