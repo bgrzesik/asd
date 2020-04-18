@@ -44,9 +44,8 @@ def _is_grandchild(grandparent, grandchild):
 def _identity(val):
     return val
 
-"""
-    Implementation of https://en.wikipedia.org/wiki/Min-max_heap
-"""
+
+# Implementation of https://en.wikipedia.org/wiki/Min-max_heap
 class Heap(object):
 
     def __init__(self, key=None, gt=None, lt=None):

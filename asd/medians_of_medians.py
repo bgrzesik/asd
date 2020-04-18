@@ -3,9 +3,8 @@ from math import ceil
 from asd.partition import partition
 from asd.quick_select import quick_select_index
 
-"""
-    Implementation of https://en.wikipedia.org/wiki/Median_of_medians
-"""
+
+# Implementation of https://en.wikipedia.org/wiki/Median_of_medians
 def quicker_select(arr, i, p=None, r=None, key=None):
     p = p if p is not None else 0
     r = r if r is not None else (len(arr) - 1)
