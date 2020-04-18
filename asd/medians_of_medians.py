@@ -1,8 +1,4 @@
-from math import ceil
-
-from asd.partition import partition
-from asd.quick_select import quick_select_index
-
+from asd.dutch_flag_problem import three_way_partition
 
 # Implementation of https://en.wikipedia.org/wiki/Median_of_medians
 def quicker_select(arr, i, p=None, r=None, key=None):
@@ -14,7 +10,7 @@ def quicker_select(arr, i, p=None, r=None, key=None):
         return p
 
     q = median(arr, p, r, key=key)
-    q = partition_eq(arr, p, r, q, i, key=key)
+    q = three_way_partition(arr, p, r, q, i, key=key)
     k = q - p + 1
 
     if k == i:
@@ -23,36 +19,6 @@ def quicker_select(arr, i, p=None, r=None, key=None):
         return quicker_select(arr, i, p, q - 1, key=key)
     else:
         return quicker_select(arr, i - k, q + 1, r, key=key)
-
-
-def partition_eq(arr, p, r, pivot_idx, n, key=None):
-    key = key if key is not None else (lambda i: arr[i])
-
-    pivot = key(pivot_idx)
-
-    arr[r], arr[pivot_idx] = arr[pivot_idx], arr[r]
-
-    i = p
-    for j in range(p, r):
-        if key(j) < pivot:
-            arr[i], arr[j] = arr[j], arr[i]
-            i += 1
-
-    ieq = i
-    for j in range(i, r):
-        if key(j) == pivot:
-            arr[ieq], arr[j] = arr[j], arr[ieq]
-            ieq += 1
-
-    arr[ieq], arr[r] = arr[r], arr[ieq]
-
-    if n < i:
-        return i  # nth is smaller then pivot
-
-    if n <= ieq:
-        return n  # nth is equal to pivot
-
-    return ieq
 
 
 def partition5(arr, p=None, r=None, key=None):
