@@ -1,24 +1,23 @@
 from asd.partition import partition
 from asd.medians_of_medians import median
-from asd.quick_select import quick_select_index
 
 
-def quicker_select_index(arr, i, p=None, r=None):
+def quicker_select_index(arr, i, p=None, r=None, key=None):
     p = p if p is not None else 0
     r = r if r is not None else (len(arr) - 1)
 
     if p == r:
         return p
 
-    q = partition(arr, p, r, pivot=median(arr, p, r))
+    q = partition(arr, p, r, pivot=median(arr, p, r, key=key))
     k = q - p + 1
 
     if k == i:
         return q
     elif i < k:
-        return quick_select_index(arr, i, p, q - 1)
+        return quicker_select_index(arr, i, p, q - 1, key=key)
     else:
-        return quick_select_index(arr, i - k, q + 1, r)
+        return quicker_select_index(arr, i - k, q + 1, r, key=key)
 
 
 if __name__ == '__main__':
