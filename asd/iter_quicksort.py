@@ -1,5 +1,5 @@
 
-from .quicksort import partition
+from asd.partition import partition
 
 
 def iter_quicksort(arr, p, r):

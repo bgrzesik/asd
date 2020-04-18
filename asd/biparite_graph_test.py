@@ -1,4 +1,4 @@
-from .queue_impl import Queue
+from asd.queue_impl import Queue
 
 
 class GraphNode:

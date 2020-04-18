@@ -1,10 +1,10 @@
-from .quick_sort import partition
-from .select_n_th_element import select
+from asd.partition import partition
+from asd.quick_select import quick_select
 
 
 def find_range(arr, p, r, nmin, nmax):
-    vmin = select(arr, p, r, nmin)
-    vmax = select(arr, p, r, nmax)
+    vmin = quick_select(arr, p, r, nmin)
+    vmax = quick_select(arr, p, r, nmax)
 
     q1 = partition(arr, p, r, pivot=vmin)
     print(arr, vmin, q1)

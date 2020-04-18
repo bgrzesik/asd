@@ -1,4 +1,4 @@
-from .queue_impl import Queue
+from asd.queue_impl import Queue
 
 from pprint import pprint
 from math import log2, floor, ceil
