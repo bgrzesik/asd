@@ -1,5 +1,6 @@
 from asd.dutch_flag_problem import three_way_partition
 
+
 # Implementation of https://en.wikipedia.org/wiki/Median_of_medians
 def quicker_select(arr, i, p=None, r=None, key=None):
     p = p if p is not None else 0
