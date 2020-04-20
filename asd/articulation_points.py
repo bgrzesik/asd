@@ -13,12 +13,12 @@ class GraphNode(object):
         return f"GraphNode[{self.adj}, {self.visited}, {self.low}, {self.d}, {self.parent}]"
 
 
-def bridges(G, start_idx):
+def articulation_points(G, start_idx):
     visit = 0
-    bridges = []
+    points = set()
 
-    def bfs_visit(v_idx):
-        nonlocal G, visit, bridges
+    def bfs_visit(v_idx, root):
+        nonlocal G, visit, points
 
         visit += 1
 
@@ -27,31 +27,40 @@ def bridges(G, start_idx):
         v.d = visit
         v.low = v.d
 
+        articulation = False
+        children = 0
+
         for u_idx in v.adj:
             u = G[u_idx]
 
             if not u.visited:
                 u.parent = v_idx
-                bfs_visit(u_idx)
+                bfs_visit(u_idx, False)
                 v.low = min(v.low, u.low)
+
+                if not root:
+                    articulation = articulation or u.low >= v.d
+
+                children += 1
             elif u_idx != v.parent:
                 v.low = min(v.low, u.low)
 
-        if v.d == v.low and v.parent is not None:
-            bridges.append((v.parent, v_idx))
+        if articulation or (root and children > 1):
+            points.add(v_idx)
 
-    bfs_visit(start_idx)
+    bfs_visit(start_idx, True)
     for i, v in enumerate(G):
         if not v.visited:
-            bfs_visit(i)
+            # different connected compound
+            bfs_visit(i, True)
 
-    return bridges
+    return points
 
 
 if __name__ == '__main__':
     #   b        e
     #  / \      /|
-    #  a  c -- b |
+    #  a  c -- d |
     #  \ /      \|
     #   g        f
     #   |
@@ -68,6 +77,7 @@ if __name__ == '__main__':
         GraphNode([6]),  # 7 h
     ]
 
-    print(bridges(G, 0))
+    points = articulation_points(G, 0)
+    print(points)
+    print([chr(ord('a') + v) for v in points])
     pprint(G)
-
