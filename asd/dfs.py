@@ -1,3 +1,5 @@
+from pprint import pprint
+
 class GraphNode:
     def __init__(self, adj=None):
         self.adj = adj if adj is not None else []
@@ -34,6 +36,7 @@ def dfs(G, s):
         v.entry = None
         v.process = None
 
+    visit(s)
     for v in range(len(G)):
         if not G[v].visited:
             visit(v)
@@ -49,4 +52,6 @@ if __name__ == '__main__':
         GraphNode([2, 3]),  # 5
     ]
     dfs(G, 0)
-    print(G)
+
+    assert all(map(lambda v: v.visited, G))
+    pprint(G)
