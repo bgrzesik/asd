@@ -191,6 +191,22 @@ class Heap(object):
         # a > b
         return self.gt(self._getkey(a), self._getkey(b))
 
+    def peek_min(self):
+        return self.arr[0]
+
+    def peek_max(self):
+        if len(self.arr) == 1:
+            return self.peek_min()
+
+        i = 1
+        if len(self.arr) >= 3 and self._lesser_then(1, 2):
+            i = 2
+
+        return self.arr[i]
+
+    def is_empty(self):
+        return len(self.arr) == 0
+
 
 if __name__ == '__main__':
     assert _is_min_level(0)
