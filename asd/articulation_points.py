@@ -57,7 +57,7 @@ def articulation_points(G, start_idx):
     return points
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     #   b        e
     #  / \      /|
     #  a  c -- d |

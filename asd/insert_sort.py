@@ -11,7 +11,7 @@ def insert_sort(arr):
         arr[j + 1] = val
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     tab = [0, 0, 2, 3, 4, 1, 3, 3, 3, 4, 5]
     insert_sort(tab)
     print(tab, list(sorted([0, 0, 2, 3, 4, 1, 3, 3, 3, 4, 5])))

@@ -34,7 +34,7 @@ def radix_sort(arr):
     return arr
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     l = [0, 9, 2, 3, 5, 5, 7, 8, 4, 6]
     arr = count_sort10(l, 1)
     assert list(sorted(l.copy())) == arr

@@ -83,7 +83,7 @@ class LinkedList(object):
         self.head = head
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     assert LinkedList.from_list([0, 1, 2, 3, 4, 5]).to_list() == [0, 1, 2, 3, 4, 5]
 
     ll = LinkedList.from_list([6, 5, 1, 2, 3, 0, 4])

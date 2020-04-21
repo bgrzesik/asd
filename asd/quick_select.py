@@ -37,7 +37,7 @@ def quick_select_index(arr, i, p=None, r=None, key=None):
         return quick_select_index(arr, i - k, q + 1, r, key=key)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     tab = [0, 2, 4, 1, 3, 5]
 
     for i in range(len(tab)):

@@ -31,7 +31,7 @@ def topological_sort(G, start_idx):
     return tab
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     G = [
         GraphNode([2, 4, 1]),  # 0
         GraphNode([2, 3]),  # 1

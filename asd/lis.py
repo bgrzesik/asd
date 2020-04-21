@@ -26,7 +26,7 @@ def lis_dyn(A):
     return B[m], arr
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     arr = [0, 8, 4, 12, 2, 10, 6, 14, 1, 9, 5, 13, 3, 11, 7, 15]
 
     assert lis_dyn(arr) == (6, [0, 2, 6, 9, 11, 15])

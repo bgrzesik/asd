@@ -16,5 +16,5 @@ def knapsack(A, k):
     return profit
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     print(knapsack([(1, 1), (10, 2), (6, 3)], 3))

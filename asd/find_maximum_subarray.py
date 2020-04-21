@@ -44,5 +44,5 @@ def find_maximum_subarray(A, low=None, high=None):
         return mid_low, mid_high, mid_sum
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     assert  find_maximum_subarray([1, -4, 3, 4, -4]) == (2, 3, 7)

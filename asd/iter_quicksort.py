@@ -17,7 +17,7 @@ def iter_quicksort(arr, p, r):
         stack.append((q + 1, r))
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     tab = [1, 2, -2, 1, 4, 10, 11, 1, 405]
     iter_quicksort(tab, 0, len(tab) - 1)
     print(tab)

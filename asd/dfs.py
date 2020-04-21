@@ -42,7 +42,7 @@ def dfs(G, s):
             visit(v)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     G = [
         GraphNode([1, 2, 3]),  # 0
         GraphNode([0, 4]),  # 1

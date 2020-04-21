@@ -15,6 +15,6 @@ def bucket_sort(tab, k):
     return res
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     tab = [0.1, 0.25, 0.2, 0.3, 0.11, 0.14, 0.6, 0.7, 0.3, 0.4]
     bucket_sort(tab, len(tab) // 2)

@@ -66,7 +66,7 @@ def quick_sort(chain):
     return left, right_last if right_last is not None else pivot
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     a, b = quick_sort(to_nodes([1, 2, 3, 4, 5]))
 
     while a is not None:

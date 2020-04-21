@@ -17,7 +17,7 @@ def counting_sort(arr, k):
     arr[:] = buf
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     tab = [0, 0, 2, 3, 4, 1, 3, 3, 3, 4, 5]
     counting_sort(tab, 6)
     print(tab, list(sorted([0, 0, 2, 3, 4, 1, 3, 3, 3, 4, 5])))

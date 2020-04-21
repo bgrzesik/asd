@@ -33,7 +33,7 @@ def find_smallest_range(arrays):
     return r_min, r_max
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     arrays = [
         [4, 7, 9, 12, 15],
         [0, 8, 10, 14, 20],

@@ -61,7 +61,7 @@ def three_way_partition(arr, p, r, pivot_idx, n, key=None):
     return mid - 1
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     tab = [3, 3, 3, 1, 0, 4, 5, 6]
     for i in range(len(tab)):
         pivot = tab[i]

@@ -33,7 +33,7 @@ def merge_sort(arr, p=0, k=None):
     merge(arr, p, sr, k)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     tab = [1, 2, -2, 1, 4, 10, 11, 1, 405]
     merge_sort(tab)
     print(tab)

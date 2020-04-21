@@ -18,6 +18,6 @@ def shortest_repr(S, t):
     return f[-1]
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     print(shortest_repr(["ab", "abab", "ba", "bab", "b"], "ababbab"))
     print(shortest_repr(["makota", "ala", "alam", "ma", "kot", "a"], "alamakota"))

@@ -14,5 +14,5 @@ def shift_array(arr, n):
     return arr
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     print(shift_array([1, 2, 3, 4, 5, 6, 7, 8, 9], 2))

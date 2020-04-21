@@ -46,7 +46,7 @@ def graph_dict_to_mat(G):
     return G_mat
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     #     b ----- c
     #   / | \   / | \
     #  a  |   g   |  d

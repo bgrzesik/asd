@@ -10,7 +10,7 @@ def quick_sort(arr, p, r):
         quick_sort(arr, q + 1, r)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     tab = [1, 2, -2, 1, 4, 10, 11, 1, 405]
     quick_sort(tab, 0, len(tab) - 1)
     print(tab)

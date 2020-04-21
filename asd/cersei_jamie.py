@@ -32,5 +32,5 @@ def cersei_jamie(activites):
     print("".join(parents))
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     cersei_jamie([(99, 150), (1, 100), (100, 301), (2, 5), (150, 250)])

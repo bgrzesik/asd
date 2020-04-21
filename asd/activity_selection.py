@@ -11,5 +11,5 @@ def tasks(A):
     return n
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     print(tasks([(0, 10), (10, 20), (5, 15)]))

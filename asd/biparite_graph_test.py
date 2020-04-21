@@ -41,7 +41,7 @@ def bfs(G, s):
     return True
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     G = [
         GraphNode([5]),  # 0
         GraphNode([4, 5]),  # 1

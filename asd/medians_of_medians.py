@@ -65,7 +65,7 @@ def median(arr, p=None, r=None, key=None):
     return idx
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     tab = [2, 4, 0, 3, 1]
 
     assert median(tab) == 2

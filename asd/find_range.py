@@ -17,6 +17,6 @@ def find_range(arr, p, r, nmin, nmax):
     return arr[q1 - 1:q2 + 1]
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     tab = [0, 2, 4, 1, 3, 5]
     find_range(tab, 0, len(tab) - 1, 2, 4), tab, list(sorted([0, 2, 4, 1, 3, 5]))

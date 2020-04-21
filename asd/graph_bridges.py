@@ -48,7 +48,7 @@ def bridges(G, start_idx):
     return bridges
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     #   b        e
     #  / \      /|
     #  a  c -- b |

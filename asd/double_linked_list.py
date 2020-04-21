@@ -69,7 +69,7 @@ class DoubleLinkedList(object):
         return arr
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     list = DoubleLinkedList()
 
     list.push_front(10)

@@ -5,7 +5,7 @@ def bubble_sort(arr):
                 arr[i], arr[j] = arr[j], arr[i]
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     tab = [0, 0, 2, 3, 4, 1, 3, 3, 3, 4, 5]
     bubble_sort(tab)
     tab, list(sorted([0, 0, 2, 3, 4, 1, 3, 3, 3, 4, 5]))

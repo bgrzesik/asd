@@ -99,7 +99,7 @@ PERTERSEN = [
     GraphNode([3, 8, 5]),  # 9
 ]
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     bfs_color(G)
     bfs_color(PERTERSEN)
 
@@ -146,7 +146,7 @@ def read_graph(filename):
     return verts
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     for file, colors in dataset:
         G = read_graph(file)
         min_colors = 2000

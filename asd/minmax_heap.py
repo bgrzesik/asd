@@ -208,7 +208,7 @@ class Heap(object):
         return len(self.arr) == 0
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     assert _is_min_level(0)
     assert not _is_min_level(2)
     assert _is_min_level(6)

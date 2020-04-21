@@ -10,6 +10,6 @@ def knapsack2d(V, max_w, max_h):
     return tab[max_w][max_h]
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     P = [(5, 10, 3), (7, 8, 12), (2, 7, 3)]
     print(knapsack2d(P, 16, 15))  # wypisze 9

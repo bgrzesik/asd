@@ -49,7 +49,7 @@ def kings_path(A):
     return costs[n - 1][n - 1]
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     A = [[1, 1, 2],
          [5, 1, 3],
          [4, 1, 1]]
