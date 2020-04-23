@@ -65,6 +65,71 @@ def median(arr, p=None, r=None, key=None):
     return idx
 
 
+def _select_partition(arr, left, right):
+    # arr[r], arr[pivot] = arr[pivot], arr[r]
+
+    i = left - 1
+    for j in range(left, right):
+        if arr[j] <= arr[right]:
+            i += 1
+            arr[i], arr[j] = arr[j], arr[i]
+
+    arr[i + 1], arr[right] = arr[right], arr[i + 1]
+    return i + 1
+
+
+def _select_insert_sort(arr, left, right):
+    for i in range(left + 1, right + 1):
+        val = arr[i]
+        j = i - 1
+
+        while j >= 0 and arr[j] >= val:
+            arr[j + 1] = arr[j]
+            j -= 1
+
+        arr[j + 1] = val
+
+
+def select(arr, left, right, i):
+    n = right - left + 1
+
+    if n < 5:
+        _select_insert_sort(arr, left, right)
+        return left + i - 1
+
+    slow = left
+    for l in range(left, right, 5):
+        r = min(l + 4, right)
+
+        if r - l < 3:
+            continue
+
+        _select_insert_sort(arr, l, r)
+
+        mid = (l + r) // 2
+
+        print(f"median {arr[mid]}")
+
+        arr[slow], arr[mid] = arr[mid], arr[slow]
+
+        slow += 1
+    print(f"====")
+
+    med = select(arr, left, slow - 1, (slow - left + 1) // 2)
+
+    arr[med], arr[right] = arr[right], arr[med]
+    mid = _select_partition(arr, left, right)
+
+    k = mid - left + 1
+
+    if k == i:
+        return mid
+    elif k > i:
+        return select(arr, left, mid - 1, i)
+    else:
+        return select(arr, mid + 1, right, i - k)
+
+
 if __name__ == "__main__":
     tab = [2, 4, 0, 3, 1]
 
@@ -86,3 +151,12 @@ if __name__ == "__main__":
 
     for i in range(len(tab)):
         assert tab[quicker_select(tab, i + 1)] == list(sorted(tab))[i]
+
+    assert select([4, 3, 2, 1, 0], 0, 4, 2) == 1
+    tab = [4, 3, 2, 1, 0, 4, 3, 2, 1, 0]
+    assert tab[select(tab, 0, 9, 4)] == 1
+    tab = [4, 3, 2, 1, 0, 4, 3, 2, 1, 0, 2, 2]
+    assert tab[select(tab, 0, 11, 5)] == 2
+    tab = [11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0]
+    assert tab[select(tab, 0, 11, 4)] == 3
+
