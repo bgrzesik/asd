@@ -107,13 +107,8 @@ def select(arr, left, right, i):
         _select_insert_sort(arr, l, r)
 
         mid = (l + r) // 2
-
-        print(f"median {arr[mid]}")
-
         arr[slow], arr[mid] = arr[mid], arr[slow]
-
         slow += 1
-    print(f"====")
 
     med = select(arr, left, slow - 1, (slow - left + 1) // 2)
 
@@ -132,7 +127,6 @@ def select(arr, left, right, i):
 
 if __name__ == "__main__":
     tab = [2, 4, 0, 3, 1]
-
     assert median(tab) == 2
     assert median([0]) == 0
     assert median([1, 0]) == 0
