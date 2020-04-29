@@ -10,7 +10,7 @@ class Node(object):
         return f"({self.d} {self.parent is None})"
 
 
-def djikstra(G, s, t):
+def djikstra(G, s):
     queue = PriorityQueue()
     nodes = [Node() for _ in range(len(G))]
 
@@ -32,17 +32,10 @@ def djikstra(G, s, t):
                 u.parent = v_idx
                 queue.put((u.d, u_idx))
 
-    path = []
-    p = t
-    while p is not None:
-        path.insert(0, p)
-        p = nodes[p].parent
-
-    return path, nodes[t].d
+    return list(map(lambda node: node.parent, nodes))
 
 
 if __name__ == "__main__":
-    names = "stxyz"
     G = [
         # s   t   x   y   z
         [None, 10, None, 5, None],  # s
@@ -52,10 +45,8 @@ if __name__ == "__main__":
         [7, None, 6, None, None],  # z
     ]
 
-    path, d = djikstra(G, 0, 4)
-
-    print(" -> ".join(map(names.__getitem__, path)))
-    print(d)
+    parents = djikstra(G, 0)
+    print(parents)
 
 
 def dijkstra(G, s):
