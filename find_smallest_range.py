@@ -1,4 +1,4 @@
-from asd.minmax_heap import Heap
+from minmax_heap import Heap
 
 
 def find_smallest_range(arrays):

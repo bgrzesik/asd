@@ -1,4 +1,4 @@
-from asd.dutch_flag_problem import three_way_partition
+from dutch_flag_problem import three_way_partition
 
 
 # Implementation of https://en.wikipedia.org/wiki/Median_of_medians

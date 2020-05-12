@@ -1,6 +1,6 @@
 
 
-from asd.partition import partition
+from partition import partition
 
 
 def quick_sort(arr, p, r):

@@ -1,5 +1,5 @@
-from asd.partition import partition
-from asd.quick_select import quick_select
+from partition import partition
+from quick_select import quick_select
 
 
 def find_range(arr, p, r, nmin, nmax):

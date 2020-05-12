@@ -1,6 +1,6 @@
 # queue_impl.py because of PyCharm bug
 
-from .stack import Stack
+from stack import Stack
 
 class Queue2(object):
     class Node(object):

@@ -1,4 +1,4 @@
-from asd.partition import partition
+from partition import partition
 
 
 def quick_select(arr, i, p=None, r=None, key=None):

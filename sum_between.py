@@ -1,4 +1,4 @@
-from asd.medians_of_medians import quicker_select
+from medians_of_medians import quicker_select
 
 
 def sum_between(arr, from_, to):
