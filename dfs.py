@@ -1,5 +1,6 @@
 from pprint import pprint
 
+
 class GraphNode:
     def __init__(self, adj=None):
         self.adj = adj if adj is not None else []
