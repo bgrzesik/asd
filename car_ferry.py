@@ -1,16 +1,18 @@
 from pprint import pprint
 
-def ferry(A, D):
-    dyn = [[[None for _ in range(D + 1)] for _ in range(D + 1)] for _ in range(len(A))]
-    lanes = [[['N' for _ in range(D + 1)] for _ in range(D + 1)] for _ in range(len(A))]
 
+def ferry(A, D):
+    dyn = [[[None for _ in range(D + 1)]
+            for _ in range(D + 1)] for _ in range(len(A))]
+    lanes = [[['N' for _ in range(D + 1)]
+              for _ in range(D + 1)] for _ in range(len(A))]
 
     for l in range(D + 1):
         for r in range(D + 1):
             if A[0] <= r:
                 dyn[0][l][r] = 1
                 lanes[0][l][r] = "R"
-            if A[0] <= l:
+            elif A[0] <= l:
                 dyn[0][l][r] = 1
                 lanes[0][l][r] = "L"
             else:
@@ -19,7 +21,6 @@ def ferry(A, D):
     for i in range(len(A)):
         dyn[i][0][0] = 0
         lanes[i][0][0] = 'N'
-
 
     def f(i, l, r):
         if dyn[i][l][r] is not None:

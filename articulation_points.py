@@ -17,7 +17,7 @@ def articulation_points(G, start_idx):
     visit = 0
     points = set()
 
-    def bfs_visit(v_idx, root):
+    def dfs_visit(v_idx, root):
         nonlocal G, visit, points
 
         visit += 1
@@ -35,7 +35,7 @@ def articulation_points(G, start_idx):
 
             if not u.visited:
                 u.parent = v_idx
-                bfs_visit(u_idx, False)
+                dfs_visit(u_idx, False)
                 v.low = min(v.low, u.low)
 
                 if not root:
@@ -48,11 +48,11 @@ def articulation_points(G, start_idx):
         if articulation or (root and children > 1):
             points.add(v_idx)
 
-    bfs_visit(start_idx, True)
+    dfs_visit(start_idx, True)
     for i, v in enumerate(G):
         if not v.visited:
             # different connected compound
-            bfs_visit(i, True)
+            dfs_visit(i, True)
 
     return points
 
