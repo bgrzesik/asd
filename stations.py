@@ -8,31 +8,29 @@ import math
 @dataclass
 class Node:
     station: bool = False
-    parent: int = None
-    fuel: int = 0
-    d: int = math.inf
+
+    d: list = None
+    parent: list = None
 
 
 def how_to_get_there(G, P, d, s, t):
     n = len(G)
-    nodes = [Node() for _ in range(n)]
+    nodes = [Node(d=[math.inf] * (d + 1), parent=[None] * (d + 1))
+             for _ in range(n)]
 
     for station in P:
         nodes[station].station = True
-        nodes[station].fuel = d
+        # nodes[station].fuel = d
 
     queue = []
-    heap_add(queue, (0, s))
+    heap_add(queue, (0, s, d))
 
-    nodes[s].fuel = d
-    nodes[s].d = 0
-
-    print(mat_to_dot(G, vex_info=lambda v: {"label": {**{"id": v}, **asdict(nodes[v])}},
-                     edge_exists=lambda e: e != -1,
-                     edge_info=lambda u, v, e: {"label": {"d": e}}))
+    # nodes[s].fuel = d
+    nodes[s].d = [0] * (d + 1)
+    nodes[s].parent = [[] for _ in range(d + 1)]
 
     while len(queue) != 0:
-        _, v = heap_pop(queue)
+        _, v, fuel = heap_pop(queue)
         vv = nodes[v]
 
         for u in range(n):
@@ -41,24 +39,19 @@ def how_to_get_there(G, P, d, s, t):
 
             uu = nodes[u]
 
-            dd = vv.d + G[v][u]
-            if ((uu.d > dd) or (uu.d == dd and uu.fuel < vv.fuel - G[v][u])) and G[v][u] <= vv.fuel:
-                uu.d = dd
-                uu.fuel = max(uu.fuel, vv.fuel - dd)
-                uu.parent = v
-                heap_add(queue, (-uu.d, u))
+            dd = vv.d[fuel] + G[v][u]
+            ff = fuel - G[v][u]
 
-    if nodes[t].parent is None:
-        return None
+            if ff >= 0 and uu.d[ff] > dd:
+                if uu.station:
+                    ff = d
 
-    path = []
-    a = t
-    while nodes[a].parent is not None:
-        path.insert(0, a)
-        a = nodes[a].parent
-    path.insert(0, a)
+                uu.d[ff] = dd
+                uu.parent[ff] = vv.parent[fuel] + [v]
+                heap_add(queue, (-dd, u, ff))
 
-    return path
+    fuel = min(enumerate(nodes[t].d), key=lambda e: e[1])[0]
+    return nodes[t].parent[fuel]
 
 
 if __name__ == "__main__":

@@ -34,14 +34,18 @@ def longest_incomplete(A, k):
         nonlocal A, k
         s = [None] * k
         n = 0
+        d = 0
 
         l = mid
         for l in range(mid, low - 1, -1):
             v = A[l]
-            if not set_has(s, v) and n + 1 < k:
+            has = set_has(s, v)
+
+            if not has and d + 1 < k:
                 n += 1
+                d += 1
                 set_add(s, v)
-            elif not set_has(s, v):
+            elif not has:
                 l += 1
                 break
             else:
@@ -52,10 +56,13 @@ def longest_incomplete(A, k):
         r = mid + 1
         for r in range(mid + 1, high + 1):
             v = A[r]
-            if not set_has(s, v) and n + 1 < k:
+            has = set_has(s, v)
+
+            if not has and d + 1 < k:
                 n += 1
+                d += 1
                 set_add(s, v)
-            elif not set_has(s, v):
+            elif not has:
                 r -= 1
                 break
             else:
