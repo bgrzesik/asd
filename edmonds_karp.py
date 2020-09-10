@@ -1,6 +1,4 @@
 
-from queue import PriorityQueue
-
 
 def edmonds_karp(G, s, t):
     n = len(G)
@@ -10,13 +8,12 @@ def edmonds_karp(G, s, t):
     f = [[0] * n for _ in range(n)]
 
     while parent is None or parent[t] is not None:
-        Q = PriorityQueue()
-        Q.put(s)
+        Q = [s]
 
         parent = [None] * n
 
-        while not Q.empty():
-            u = Q.get()
+        while len(Q) != 0:
+            u = Q.pop()
 
             for v, w in enumerate(G[u]):
                 if w is None:
@@ -24,7 +21,7 @@ def edmonds_karp(G, s, t):
 
                 if parent[v] is None and v != s and f[u][v] < w:
                     parent[v] = u
-                    Q.put(v)
+                    Q.insert(0, v)
 
         if parent[t] is not None:
             profit = float("+inf")
@@ -41,6 +38,7 @@ def edmonds_karp(G, s, t):
                 i = parent[i]
 
     return f
+
 
 if __name__ == "__main__":
     from pprint import pprint
