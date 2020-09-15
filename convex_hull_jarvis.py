@@ -2,6 +2,7 @@ from functools import cmp_to_key, partial
 from typing import *
 from random import Random
 
+# O(n * h)
 
 def angle_cmp(p1, p2, p3):
 

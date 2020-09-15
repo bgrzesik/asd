@@ -15,9 +15,6 @@ class Node:
 def biggest(G, s, t):
     queue = [(0, math.inf, s)]
 
-    for v in G:
-        v.adj.sort(key=lambda e: e[1])
-
     G[s].d = 0
     G[s].parent = None
 

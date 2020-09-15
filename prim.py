@@ -1,5 +1,7 @@
 from queue import PriorityQueue
 
+# O(E log V)
+
 
 class Node(object):
     def __init__(self):

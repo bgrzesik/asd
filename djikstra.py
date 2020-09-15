@@ -1,10 +1,13 @@
 from queue import PriorityQueue
 
 
+# O(E + VlogV)
+
 class Node(object):
     def __init__(self):
         self.d = float("+inf")
         self.parent = None
+        self.visited = False
 
     def __repr__(self):
         return f"({self.d} {self.parent is None})"
@@ -20,6 +23,10 @@ def djikstra(G, s):
     while not queue.empty():
         _, v_idx = queue.get()
         v = nodes[v_idx]
+
+        if v.visited:
+            continue
+        v.visited = True
 
         for u_idx in range(len(G)):
             if G[v_idx][u_idx] is None:
@@ -55,12 +62,17 @@ def dijkstra(G, s):
 
     parents = [None] * n
     dist = [float("+inf")] * n
+    visited = [False] * n
 
     dist[s] = 0
     queue.put((0, s))
 
     while not queue.empty():
         _, v_idx = queue.get()
+
+        if visited[v_idx]:
+            continue
+        visited[v_idx] = True
 
         for u_idx, w in G[v_idx]:
             if dist[u_idx] > dist[v_idx] + w:

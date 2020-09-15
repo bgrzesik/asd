@@ -1,5 +1,7 @@
 from queue import PriorityQueue
 
+# O(E log E)
+
 
 class Node(object):
     def __init__(self):
@@ -78,4 +80,3 @@ if __name__ == "__main__":
 
     idx = "abcdefghi"
     print(list(map(lambda a: f"{idx[a[0]]} -- {idx[a[1]]}", kruskal(G))))
-

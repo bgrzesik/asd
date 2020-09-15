@@ -1,4 +1,5 @@
 
+# O(EV^2)
 
 def edmonds_karp(G, s, t):
     n = len(G)
