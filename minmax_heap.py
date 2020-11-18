@@ -1,6 +1,7 @@
 from math import log2, floor
 import operator
 
+
 def _parent(i):
     # 1 -> 0
     # 2 -> 0
@@ -251,4 +252,3 @@ if __name__ == "__main__":
     heap = Heap.from_array(arr, key=Box.getval)
     heap.insert(Box(9))
     assert heap.extract_max().getval() == 9
-
